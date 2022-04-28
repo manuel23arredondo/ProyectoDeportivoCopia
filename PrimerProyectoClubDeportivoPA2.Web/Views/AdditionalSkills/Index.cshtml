@@ -1,0 +1,60 @@
+﻿@model IEnumerable<PrimerProyectoClubDeportivoPA2.Web.Data.Entities.AdditionalSkill>
+
+@{
+    ViewData["Title"] = "Habilidades extras";
+}
+
+<h1>Habilidades extras del Coach</h1>
+
+<p>
+    @if (this.User.IsInRole("Admin") || this.User.IsInRole("Coach"))
+    {
+    <a asp-action="Create" class="btn btn-success">Crear nueva habilidad</a>
+    }
+</p>
+<table class="table table-dark">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Coach.User.FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sport.Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Coach.User.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sport.Name)
+            </td>
+            <td>
+                @if (this.User.IsInRole("Admin") || this.User.IsInRole("Coach"))
+                {
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Editar</a>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-warning">Detalles</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Eliminar</a>
+                }
+            </td>
+            
+            <td>
+                @if(this.User.IsInRole("Member"))
+                {
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-warning">Detalles</a>
+                }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

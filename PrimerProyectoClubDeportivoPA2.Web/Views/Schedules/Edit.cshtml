@@ -1,0 +1,46 @@
+﻿@model PrimerProyectoClubDeportivoPA2.Web.Models.ScheduleViewModel
+@{
+    ViewData["Title"] = "Editar Horario";
+}
+
+<h1>Editar</h1>
+
+<h4>Horario</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+
+            <div class="form-group">
+                <label asp-for="StartingHour" class="control-label"></label>
+                <input asp-for="StartingHour" size="16" class="form-control" id="datetime" />
+                <span asp-validation-for="StartingHour" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FinishingHour" class="control-label"></label>
+                <input asp-for="FinishingHour" size="16" class="form-control" id="datetime" />
+                <span asp-validation-for="FinishingHour" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FacilityId" class="control-label"></label>
+                <select asp-for="FacilityId" asp-items="Model.Facilities" class="form-control"></select>
+                <span asp-validation-for="Facility" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WeekDayId" class="control-label"></label>
+                <select asp-for="WeekDayId" asp-items="Model.WeekDays" class="form-control"></select>
+                <span asp-validation-for="WeekDay" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Guardar" class="btn btn-success" />
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" class="btn btn-info">Regresar a la lista</a>
+</div>

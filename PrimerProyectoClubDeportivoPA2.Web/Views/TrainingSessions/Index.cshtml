@@ -1,0 +1,84 @@
+﻿@model IEnumerable<PrimerProyectoClubDeportivoPA2.Web.Data.Entities.TrainingSession>
+
+@{
+    ViewData["Title"] = "Sesiones de Entrenamiento";
+}
+
+<h1>Sesiones de Entrenamiento</h1>
+
+<p>
+    @if ((this.User.IsInRole("Admin")) || (this.User.IsInRole("Coach")))
+    {
+        <a asp-action="Create" class="btn btn-success">Agregar Sesión de Entrenamiento</a>
+    }
+</p>
+<table class="table table-dark">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Coach.User.FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sport.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Schedule.StartingHour)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Schedule.FinishingHour)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Schedule.WeekDay.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Schedule.Facility.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Capacity)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Coach.User.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sport.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Schedule.StartingHour)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Schedule.FinishingHour)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Schedule.WeekDay.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Schedule.Facility.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Capacity)
+            </td>
+            <td>
+                @if (this.User.IsInRole("Admin"))
+                {
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Editar</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Eliminar</a>
+                }
+
+                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-warning">Detalles</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
